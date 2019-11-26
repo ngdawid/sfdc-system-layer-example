@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<flow name="common:building-the-query-single-flow" doc:id="b7914dcb-525d-4da3-89df-3ca3c5a6ed0e">
+		<logger level="INFO" doc:name="Logger" doc:id="3f8bc947-522e-4046-9eb3-c9de6a278439" message="#[p('sfdc.Account.fields')]"/>
+		<flow-ref doc:name="Flow Reference" doc:id="aec19adf-bf4f-48b1-8121-9b1cbe70094c" name="extract-fields-from-properties-based-on-uri-parameter"/>
+		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" doc:id="27b60a32-36aa-4680-ab7c-ef31be20ab3c">
+            <ee:variables>
+                <ee:set-variable variableName="query"><![CDATA["Select Id, " ++(vars.fields)++" from "++ (vars.'object' default "") ++ " where Id='" ++ (vars.'sfdc-record-id' default "") ++ "'"]]></ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="4a09df71-f2ca-4ac2-b679-1c6dd18438ba" message="#[vars.query]" />
+	</flow>
+	<flow name="common:building-the-query-recent-flow" doc:id="db103598-b13f-4937-a76a-afc2f1cdee1a">
+		<logger level="INFO" doc:name="Logger" doc:id="6601006a-806e-4c2a-a58d-5839b8c0806c" message="#[p('sfdc.Account.fields')]"/>
+		<flow-ref doc:name="generate-fields" doc:id="b97c3dc4-01eb-4491-af59-7c2e2a25637d" name="extract-fields-from-properties-based-on-uri-parameter"/>
+		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" doc:id="a0b1757c-38c0-46a8-8a84-cd4114a65cf1">
+            <ee:variables>
+                <ee:set-variable variableName="query"><![CDATA["Select Id, " ++(vars.fields)++" from "++ (vars.'object' default "") ++ " order by lastmodifieddate desc limit 20"]]></ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        
+		<logger level="INFO" doc:name="Logger" doc:id="2cb77c5c-588d-4e60-828a-1214da0b1fe3" message="#[vars.fields]" />
+	</flow>
+	<sub-flow name="extract-fields-from-properties-based-on-uri-parameter" doc:id="6c1c51c3-30aa-4dfc-b156-ac7eb06f4c9a">
+		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" doc:id="1f90092b-2575-40ef-8940-5b3c97ec16c2">
+            <ee:variables>
+                <ee:set-variable variableName="fields">
+                <![CDATA[
+                	p('sfdc.'++(vars.'object')++'.fields')
+                	]]></ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+	</sub-flow>
+
+</mule>

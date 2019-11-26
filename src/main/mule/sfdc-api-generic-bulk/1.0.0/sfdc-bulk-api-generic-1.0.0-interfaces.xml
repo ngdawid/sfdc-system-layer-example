@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	
+<flow name="patch:\(object)\(operation):sfdc-bulk-api-generic-1.0.0-config">
+        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
+            <ee:variables>
+                <ee:set-variable variableName="object">attributes.uriParams.'object'</ee:set-variable>
+                <ee:set-variable variableName="operation">attributes.uriParams.'operation'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <logger level="INFO" message="patch:\(object)\(operation):sfdc-bulk-api-generic-1.0.0-config" />
+    </flow>
+    <flow name="patch:\(object)\(operation)\(update-field):sfdc-bulk-api-generic-1.0.0-config">
+        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
+            <ee:variables>
+                <ee:set-variable variableName="object">attributes.uriParams.'object'</ee:set-variable>
+                <ee:set-variable variableName="operation">attributes.uriParams.'operation'</ee:set-variable>
+                <ee:set-variable variableName="update-field">attributes.uriParams.'update-field'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <logger level="INFO" message="patch:\(object)\(operation)\(update-field):sfdc-bulk-api-generic-1.0.0-config" />
+    </flow>
+    <flow name="post:\(object)\(operation):sfdc-bulk-api-generic-1.0.0-config">
+        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
+            <ee:variables>
+                <ee:set-variable variableName="object">attributes.uriParams.'object'</ee:set-variable>
+                <ee:set-variable variableName="operation">attributes.uriParams.'operation'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <logger level="INFO" message="post:\(object)\(operation):sfdc-bulk-api-generic-1.0.0-config" />
+    </flow>
+
+</mule>

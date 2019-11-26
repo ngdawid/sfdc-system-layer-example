@@ -1,0 +1,1 @@
+{Account:{BillingStreet=Behrenstra�e 55-57, Id=null, type=Account, Name=Thomas Baier}, AccountId=0011i00000J78HmAAJ, Amount=null, Id=0061i0000053ByDAAU, type=Opportunity, Name=Thomas Baier-}

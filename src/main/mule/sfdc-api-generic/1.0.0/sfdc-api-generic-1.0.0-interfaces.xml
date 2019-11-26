@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+    <flow name="get:\(object)\(sfdc-record-id):sfdc-api-generic-1.0.0-config">
+        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" doc:id="c0a33b0a-10e5-43ba-a695-aec90eccd0c3">
+            <ee:variables>
+                <ee:set-variable variableName="object"><![CDATA[attributes.uriParams.'object']]></ee:set-variable>
+                <ee:set-variable variableName="sfdc-record-id"><![CDATA[attributes.uriParams.'sfdc-record-id']]></ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <logger level="INFO" message="get:\(object)\(sfdc-record-id):sfdc-api-generic-1.0.0-config" />
+		<flow-ref doc:name="Flow Reference" doc:id="ef3deb33-b3f1-4d53-95fd-b770167efb7c" name="get:\(object)\(sfdc-record-id):sfdc-api-generic-1.0.0-impl" />
+    
+</flow>
+	<flow name="get:\(object)\recent:sfdc-api-generic-1.0.0-config">
+        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" doc:id="20fd06b3-0af8-46df-a122-33b62e6f7eb4">
+            <ee:variables>
+                <ee:set-variable variableName="object"><![CDATA[attributes.uriParams.'object']]></ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <logger level="INFO" message="get:\(object)\recent:sfdc-api-generic-1.0.0-config" />
+		<flow-ref doc:name="Flow Reference" doc:id="fb68f48e-da59-4268-9f9a-64ad3d018c55" name="get:\(object)\recent:sfdc-api-generic-1.0.0-impl" />
+    
+</flow>
+	<flow name="patch:\(object)\(custom-field)\(ext-record-id):sfdc-api-generic-1.0.0-config">
+        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
+            <ee:variables>
+                <ee:set-variable variableName="object">attributes.uriParams.'object'</ee:set-variable>
+                <ee:set-variable variableName="custom-field">attributes.uriParams.'custom-field'</ee:set-variable>
+                <ee:set-variable variableName="ext-record-id">attributes.uriParams.'ext-record-id'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <logger level="INFO" message="patch:\(object)\(custom-field)\(ext-record-id):sfdc-api-generic-1.0.0-config" />
+    </flow>
+	<flow name="patch:\(object)\(sfdc-record-id):sfdc-api-generic-1.0.0-config">
+        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
+            <ee:variables>
+                <ee:set-variable variableName="object">attributes.uriParams.'object'</ee:set-variable>
+                <ee:set-variable variableName="sfdc-record-id">attributes.uriParams.'sfdc-record-id'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <logger level="INFO" message="patch:\(object)\(sfdc-record-id):sfdc-api-generic-1.0.0-config" />
+    </flow>
+    <flow name="post:\(object):sfdc-api-generic-1.0.0-config">
+        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
+            <ee:variables>
+                <ee:set-variable variableName="object">attributes.uriParams.'object'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <logger level="INFO" message="post:\(object):sfdc-api-generic-1.0.0-config" />
+    </flow>
+</mule>

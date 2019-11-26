@@ -1,0 +1,34 @@
+#%RAML 1.0
+title: sfdc-bulk-api-generic
+
+baseUri: localhost:8089/bulk
+version: 1.0.0
+
+/{object}/{operation}:
+  uriParameters:
+    object:
+      required: true
+      displayName: API object name of salesforce
+      description: 
+      enum:
+        - Account
+        - Contact
+        - Opportunity
+      example:
+        Account
+    operation:
+      displayName: operation
+      type: string
+      description: Value to decide which patch operation should be applied
+      example: update or upsert
+      default: update
+      required: false
+  post:
+  patch:
+  /{update-field}:
+    uriParameters:
+      update-field:
+        required: false
+        displayName: Upsert field
+        description: provide this for saleforce to update records
+    patch:

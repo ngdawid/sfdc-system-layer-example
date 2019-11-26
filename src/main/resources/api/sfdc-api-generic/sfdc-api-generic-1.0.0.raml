@@ -1,0 +1,28 @@
+#%RAML 1.0
+title: sfdc-api-generic
+baseUri: localhost
+version: 1.1.9
+
+/{object}:
+  uriParameters:
+    object:
+      required: true
+      displayName: API object name of salesforce
+      description: 
+      enum:
+        - Account
+        - Contact
+        - Lead
+        - Campaign
+        - Opportunity
+        - OpportunityLineItem
+      example:
+        Account
+  post:
+  /recent:
+    get:
+  /{sfdc-record-id}:
+    get:
+    patch:
+  /{custom-field}/{ext-record-id}:
+    patch:
